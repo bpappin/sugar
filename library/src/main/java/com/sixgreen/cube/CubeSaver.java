@@ -10,15 +10,14 @@ import com.sixgreen.cube.support.CubeDataManager;
  * <p>
  * There are two versions of the save() method. The no-args version does the
  * save operation inside its own transaction - it's the simplest way of saving
- * an object. The other version takes a Session object (see HibernateManager for
- * ways of acquiring one) and adds the save operation to the session's
+ * an object. The other version takes a CubeDataManager object and adds the save operation to the mangers
  * transaction.
  *
  * Created by bpappin on 16-08-23.
  */
-public abstract class Saver {
+public abstract class CubeSaver {
 
-    public Saver() {
+    public CubeSaver() {
         super();
     }
 

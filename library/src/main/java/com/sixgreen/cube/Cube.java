@@ -84,7 +84,7 @@ public class Cube implements BaseColumns {
     }
 
 
-    public static <T> T executeLoader(final Loader<T> loader) throws Exception {
+    public static <T> T executeLoader(final CubeLoader<T> loader) throws Exception {
         T result = null;
         CubeDataManager manager = null;
         try {
@@ -101,7 +101,7 @@ public class Cube implements BaseColumns {
         return result;
     }
 
-    public static void executeDeleter(final Deleter deleter) throws Exception {
+    public static void executeDeleter(final CubeDeleter deleter) throws Exception {
         CubeDataManager manager = null;
         try {
             manager = getCubeDataManager();
@@ -116,7 +116,7 @@ public class Cube implements BaseColumns {
         }
     }
 
-    public static void executeSaver(final Saver saver) throws Exception {
+    public static void executeSaver(final CubeSaver saver) throws Exception {
         //EntityTransaction transaction = null;
         CubeDataManager manager = null;
         try {
@@ -133,7 +133,7 @@ public class Cube implements BaseColumns {
     }
     
 
-    public static void executeUpdater(final Updater updater) throws Exception {
+    public static void executeUpdater(final CubeUpdater updater) throws Exception {
         CubeDataManager manager = null;
         try {
             manager = getCubeDataManager();
