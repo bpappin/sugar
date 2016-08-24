@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import com.sixgreen.cube.support.CubeCursorFactory;
 import com.sixgreen.cube.support.CubeDataManager;
 import com.sixgreen.cube.support.CubeErrorHandler;
+import com.sixgreen.cube.support.CubeManifest;
 
 import java.lang.reflect.Field;
 import java.util.Collections;
@@ -28,10 +29,7 @@ public abstract class CubeConfig {
     private final static Map<Class<?>, List<Field>> fieldCache = new HashMap<>();
 
     public static final CubeConfig manifest(Context context) {
-
-        
-
-        return null;
+        return CubeManifest.getConfig(context);
     }
 
     public boolean isDebug() {

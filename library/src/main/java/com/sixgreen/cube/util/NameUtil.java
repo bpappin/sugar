@@ -22,8 +22,8 @@ public final class NameUtil {
      * "_id" (not case sensitive) in which case "_id" is returned
      */
     public static String toSQLNameDefault(String camelCased) {
-        if (camelCased.equalsIgnoreCase(Cube.DEFAULT_ID_COLUMN)) {
-            return Cube.DEFAULT_ID_COLUMN;
+        if (camelCased.equalsIgnoreCase(Cube._ID)) {
+            return Cube._ID;
         }
 
         StringBuilder sb = new StringBuilder();
@@ -68,7 +68,7 @@ public final class NameUtil {
      */
     public static String toColumnName(Field field) {
         if (field.isAnnotationPresent(Id.class)) {
-            return Cube.DEFAULT_ID_COLUMN;
+            return Cube._ID;
         } else if (field.isAnnotationPresent(Column.class)) {
             Column annotation = field.getAnnotation(Column.class);
             return annotation.name();

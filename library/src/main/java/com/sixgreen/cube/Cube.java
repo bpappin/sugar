@@ -2,29 +2,45 @@ package com.sixgreen.cube;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
+import android.provider.BaseColumns;
 import android.util.Log;
 
+import com.sixgreen.cube.annotation.Table;
 import com.sixgreen.cube.support.CubeDataManager;
+import com.sixgreen.cube.util.NameUtil;
 
 /**
  * Created by bpappin on 16-08-11.
  */
-public class Cube {
+public class Cube implements BaseColumns {
     // XXX As a library, it is beneficial for the client to get log messages from a consistent tag.
     public static final String TAG = "Cube";
-    public static final String DEFAULT_ID_COLUMN = "_id";
+    //public static final String DEFAULT_ID_COLUMN = BaseColumns._ID"_id";
     private static Cube instance;
 
     private Context context;
     private CubeConfig config;
     private CubeDataManager cubeDataManager;
 
+    /**
+     * Initialize Cube.
+     *
+     * @param context
+     */
     public static void setup(Context context) {
         setup(context, CubeConfig.manifest(context));
     }
 
+    /**
+     * This init allows you to provide the configuration manually. CAuthion should be used however,
+     * because the ContentProvider will stop working.
+     *
+     * @param context
+     * @param config
+     */
     public static void setup(Context context, CubeConfig config) {
         if (instance == null) {
             instance = new Cube();
@@ -161,4 +177,22 @@ public class Cube {
         sqLiteDatabase.setLockingEnabled(true);
     }
     
+    public static <T> Uri createUri(Class<T> type, Long id) {
+        final StringBuilder uri = new StringBuilder();
+        uri.append("content://");
+        uri.append(getConfig().getAuthority());
+        uri.append("/");
+        uri.append(NameUtil.toTableName(type).toLowerCase());
+
+        if (id != null) {
+            uri.append("/");
+            uri.append(id.toString());
+        }
+
+        return Uri.parse(uri.toString());
+    }
+
+    public static boolean isEntity(Class<?> fieldType) {
+        return fieldType.isAnnotationPresent(Table.class);
+    }
 }

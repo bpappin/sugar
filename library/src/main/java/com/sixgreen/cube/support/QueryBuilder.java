@@ -1,5 +1,6 @@
 package com.sixgreen.cube.support;
 
+import com.sixgreen.cube.Cube;
 import com.sixgreen.cube.util.ReflectionUtil;
 
 import java.math.BigDecimal;
@@ -51,5 +52,13 @@ public class QueryBuilder {
             stringBuilder.append(",?");
         }
         return stringBuilder.toString();
+    }
+    
+    public static String id() {
+        return Cube._ID + " = ?";
+    }
+
+    public static String column(String name) {
+        return name + " = ?";
     }
 }

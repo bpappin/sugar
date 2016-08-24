@@ -197,7 +197,7 @@ public final class ReflectionUtil {
                 return;
             }
 
-            if (colName.equalsIgnoreCase(Cube.DEFAULT_ID_COLUMN)) {
+            if (colName.equalsIgnoreCase(Cube._ID)) {
                 long cid = cursor.getLong(columnIndex);
                 field.set(object, cid);
             } else if (fieldType.equals(long.class) || fieldType.equals(Long.class)) {
@@ -285,7 +285,7 @@ public final class ReflectionUtil {
 
     public static void setFieldValueForId(Object object, Long value) {
         try {
-            Field field = getDeepField(Cube.DEFAULT_ID_COLUMN, object.getClass());
+            Field field = getDeepField(Cube._ID, object.getClass());
             field.setAccessible(true);
             field.set(object, value);
         } catch (Exception e) {

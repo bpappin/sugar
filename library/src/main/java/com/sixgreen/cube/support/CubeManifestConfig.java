@@ -9,6 +9,14 @@ public class CubeManifestConfig extends CubeConfig {
     private String databaseName;
     private int version;
     private String authority;
+    private Class<?>[] entities;
+
+    public CubeManifestConfig(String authority, String databaseName, Class<?>[] entities, int version) {
+        this.authority = authority;
+        this.databaseName = databaseName;
+        this.entities = entities;
+        this.version = version;
+    }
 
     @Override
     public String getDatabaseName() {
@@ -20,7 +28,7 @@ public class CubeManifestConfig extends CubeConfig {
      */
     @Override
     public Class<?>[] getEntityClasses() {
-        return new Class<?>[0];
+        return entities;
     }
 
     /**
@@ -33,18 +41,12 @@ public class CubeManifestConfig extends CubeConfig {
         return authority;
     }
 
-    public void setDatabaseName(String databaseName) {
-        this.databaseName = databaseName;
-    }
 
     @Override
     public int getVersion() {
         return version;
     }
 
-    public void setVersion(int version) {
-        this.version = version;
-    }
 
     ///**
     // * Key for the database name meta data.

@@ -42,14 +42,14 @@ public class SqlBuilder {
         }
 
         StringBuilder sb = new StringBuilder("CREATE TABLE IF NOT EXISTS ");
-        sb.append(tableName).append(" ( "+Cube.DEFAULT_ID_COLUMN+" INTEGER PRIMARY KEY AUTOINCREMENT ");
+        sb.append(tableName).append(" ( "+Cube._ID+" INTEGER PRIMARY KEY AUTOINCREMENT ");
 
         for (Field column : fields) {
             String columnName = NameUtil.toColumnName(column);
             String columnType = QueryBuilder.getColumnType(column.getType());
 
             if (columnType != null) {
-                if (columnName.equalsIgnoreCase(Cube.DEFAULT_ID_COLUMN)) {
+                if (columnName.equalsIgnoreCase(Cube._ID)) {
                     continue;
                 }
 
